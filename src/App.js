@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import Todos from './components/Todos';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+function Home() {
+  return <h1>Welcome home!</h1>;
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Link to="/">Home</Link>{''}
+        <Link to="/Todos">Todos</Link>{Todos}
+        <Link to="/users">Users</Link>{''}
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/Todos" component={Todos} />
+          <Route path="/users" render={() => <h2>Users</h2>} />
+          <Route render={() => <h1>Page not found</h1>} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
