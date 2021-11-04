@@ -1,12 +1,19 @@
 import './App.css';
 import Todos from './components/Todos';
-import React from "react";
+//import React from "react";
+import React, { useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+
+
+
 
 function Home() {
   return <h1>Welcome home!</h1>;
@@ -30,4 +37,29 @@ function App() {
   );
 }
 
-export default App;
+//export default App;
+
+function TabApp() {
+  const [value, setValue] = useState('one');
+
+  const handleChange = (event, value) => {
+    setValue(value);
+  };
+  
+  return (
+    <div>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleChange}>
+          <Tab value="one" label="Home" />
+          <Tab value="two" label="Todos" />
+          <Tab value="three" label="Users"/>
+        </Tabs>
+      </AppBar>
+      {value === 'one' && <div>{Home()}</div>}
+      {value === 'two' && <div>{App()}</div>}
+      {value === 'three' && <div>Users</div>}
+    </div>
+  );
+}
+
+export default TabApp;
